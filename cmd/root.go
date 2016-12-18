@@ -64,11 +64,13 @@ func initConfig() {
 
 	if err := viper.ReadInConfig(); err != nil {
 		printError("Config file not found! Please, follow the sample at config.yaml.sample")
+		os.Exit(1)
 	}
 
 	api, err := cloudflare.New(viper.GetString("cf_api_key"), viper.GetString("cf_api_email"))
 	if err != nil {
 		printError(err)
+		os.Exit(1)
 	}
 
 	cfAPI = api

@@ -22,6 +22,7 @@ package cmd
 
 import (
 	"fmt"
+	"os"
 
 	"github.com/spf13/cobra"
 )
@@ -40,10 +41,10 @@ Query the record ID with list-records.`,
 	Run: func(cmd *cobra.Command, args []string) {
 		if len(args) < 3 && selfIP == false {
 			printNotice("You must specify the zone ID, record ID and it's new content.")
-			return
+			os.Exit(1)
 		} else if len(args) < 2 && selfIP == true {
 			printNotice("You must specify the zone ID and record ID.")
-			return
+			os.Exit(1)
 		}
 
 		var zoneID, recordID, content string
@@ -57,6 +58,7 @@ Query the record ID with list-records.`,
 			content, err = getIP()
 			if err != nil {
 				printError(err)
+				os.Exit(1)
 			}
 
 			fmt.Println(fmt.Sprintf("Self IP: %s", content))
@@ -65,7 +67,7 @@ Query the record ID with list-records.`,
 		err := updateRecord(zoneID, recordID, content, newTTL)
 		if err != nil {
 			printError(err)
-			return
+			os.Exit(1)
 		}
 
 		printSuccess("Done.")

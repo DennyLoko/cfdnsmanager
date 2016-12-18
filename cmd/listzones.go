@@ -37,6 +37,7 @@ var listCmd = &cobra.Command{
 		zones, err := cfAPI.ListZones()
 		if err != nil {
 			printError(err)
+			os.Exit(1)
 		}
 
 		w := tabwriter.NewWriter(os.Stdout, 1, 4, 2, ' ', tabwriter.TabIndent)

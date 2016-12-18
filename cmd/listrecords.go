@@ -40,7 +40,7 @@ Query the Zone ID with list-zones.`,
 	Run: func(cmd *cobra.Command, args []string) {
 		if len(args) == 0 {
 			printNotice("You must specify the zone ID.")
-			return
+			os.Exit(1)
 		}
 
 		rtypes := strings.Split(types, ",")
@@ -52,6 +52,7 @@ Query the Zone ID with list-zones.`,
 			})
 			if err != nil {
 				printError(err)
+				os.Exit(1)
 			}
 
 			w := tabwriter.NewWriter(os.Stdout, 1, 4, 2, ' ', tabwriter.TabIndent)
