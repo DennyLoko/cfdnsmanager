@@ -50,7 +50,7 @@ func Execute() {
 func init() {
 	cobra.OnInitialize(initConfig)
 
-	RootCmd.PersistentFlags().StringVar(&cfgFile, "config", "", "config file (default is config.yaml)")
+	RootCmd.PersistentFlags().StringVar(&cfgFile, "config", "", "config file (default is /etc/cfdnsmanager.yaml)")
 }
 
 func initConfig() {
@@ -58,8 +58,9 @@ func initConfig() {
 		viper.SetConfigFile(cfgFile)
 	}
 
-	viper.SetConfigName("config")
-	viper.AddConfigPath(".")
+	viper.SetConfigName("cfdnsmanager")
+	viper.AddConfigPath("/etc")
+	viper.AddConfigPath("$HOME")
 	viper.AutomaticEnv()
 
 	if err := viper.ReadInConfig(); err != nil {
