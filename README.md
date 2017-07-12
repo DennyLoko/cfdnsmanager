@@ -11,6 +11,15 @@ The tool reads a configuration file from `$HOME/cfdnsmanager.yaml` or
 `/etc/cfdnsmanager.yaml` with your CloudFlare credentials. You can find a sample
 of the credentials at [`config.yaml.sample`](./blob/master/config.yaml.sample).
 
+## Usage
+
+```
+$ cfdnsmanager list-zones
+Searching zones...
+ID                                ZONE              PLAN
+168460b0f2e5b3974a00203f40c3fcdd  dannielmagno.com  Free Website
+```
+
 ## Development
 If you want to help the development of the tool, you can do it by submitting
 your PR.
